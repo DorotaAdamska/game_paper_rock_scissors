@@ -4,16 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <title>Papier, kamień, nożyce</title>
-  
-  
-  
-      <link rel="stylesheet" href="css/style.css">
-
-  
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-
   <head>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 </head>
@@ -24,9 +18,9 @@
         <h1>GRA - papier, kamień, nożyce</h1>
         <h2>Wybierz jedną z opcji</h2>
         <div class="game-options">
-            <button id="paper" disabled class="far fa-hand-paper"></button>
-            <button id="rock" disabled class="far fa-hand-rock"></button>
-            <button id="scissors" disabled class="far fa-hand-scissors"></button>
+            <button data-move="paper" id="paper" disabled class="far fa-hand-paper player-move"></button>
+            <button data-move="rock" id="rock" disabled class="far fa-hand-rock player-move"></button>
+            <button data-move="scissors" id="scissors" disabled class="far fa-hand-scissors player-move"></button>
         </div>
         <div id="output"></div>
     </div>

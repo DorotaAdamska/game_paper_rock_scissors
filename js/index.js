@@ -49,9 +49,18 @@ function refreshScore() {
   score.innerHTML = player.score + ' - ' + computer.score;
 }
 
-function playerMove(playerChoice) {
+var btnChoice = document.querySelectorAll('.player-move'); 
+
+for (var i = 0; i < btnChoice.length; i++) {
+  var dataMove = btnChoice[i].getAttribute('data-move');
+  btnChoice[i].addEventListener('click', function(){
+    playerMove(dataMove);
+  });
+};
+
+function playerMove(dataMove) {
   
-    player.choice = playerChoice;
+    player.choice = dataMove;
     computer.choice = computerMove();
   
     checkRoundWinner();
