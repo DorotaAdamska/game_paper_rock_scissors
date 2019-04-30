@@ -1,47 +1,58 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <title>Papier, kamień, nożyce</title>
   <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-  <head>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 </head>
 
 <body>
   <div class="container">
     <div class="play">
-        <h1>GRA - papier, kamień, nożyce</h1>
-        <h2>Wybierz jedną z opcji</h2>
-        <div class="game-options">
-            <button data-move="paper" id="paper" disabled class="far fa-hand-paper player-move"></button>
-            <button data-move="rock" id="rock" disabled class="far fa-hand-rock player-move"></button>
-            <button data-move="scissors" id="scissors" disabled class="far fa-hand-scissors player-move"></button>
-        </div>
-        <div id="output"></div>
+      <h1>GRA - papier, kamień, nożyce</h1>
+      <h2>Wybierz jedną z opcji</h2>
+      <div class="game-options">
+        <button data-move="papier" id="paper" disabled class="far fa-hand-paper player-move"></button>
+        <button data-move="kamień" id="rock" disabled class="far fa-hand-rock player-move"></button>
+        <button data-move="nożyczki" id="scissors" disabled class="far fa-hand-scissors player-move"></button>
+      </div>
+      <div id="output"></div>
     </div>
     <div class="game">
-        <button id="new-game">Nowa gra</button>
-        <div id="round-number"></div>
-        <h2>Tabela wyników</h2>
-        <h3>Ty - komputer </h3>
-        <div id="score"></div>
-        <div id="game-result"></div>
+      <button id="new-game">Nowa gra</button>
+      <div id="round-number"></div>
+      <h2>Tabela wyników</h2>
+      <h3>Ty - komputer </h3>
+      <div id="score"></div>
+      <div id="game-result"></div>
     </div>
   </div>
+  <div class="overlay" id="modal-overlay">
+    <div class="modal" id="modal-one">
+      <a href="#" class="close">x</a>
+      <header>Koniec gry</header>
+      <div id="result" class="content">
+        <div class="msg"></div>
+        <div class="progress">
+          <table id="table">
+            <thead>
+              <tr>
+                <th>Numer rundy</th>
+                <th>Wybór gracza</th>
+                <th>Wybór komputera</th>
+                <th>Zwycięzca rundy</th>
+                <th>Wynik po rundzie</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/script.js"></script>
 </body>
-  
-  
-
-    <script  src="js/index.js"></script>
-
-
-
-
-</body>
-
 </html>

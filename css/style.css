@@ -1,13 +1,135 @@
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-body { font-family: 'Lato', sans-serif; text-align: center; color: #4c4c4c; padding: 3em; }
+body {
+  font-family: 'Lato', sans-serif;
+  text-align: center;
+  color: #4c4c4c;
+  padding: 3em;
+}
 
-.container { display: flex; flex-wrap: wrap; justify-content: space-around; }
+.container {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
 
-.game-options .far { background-color: #007091; width: 100px; height: 100px; border-radius: 10px; color: #ffdd00; position: relative; font-size: 60px; text-align: center; cursor: pointer; line-height: 100px; margin: 20px; }
+.game-options .far {
+  background-color: #007091;
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  color: #ffdd00;
+  position: relative;
+  font-size: 60px;
+  text-align: center;
+  cursor: pointer;
+  line-height: 100px;
+  margin: 20px;
+}
 
-#new-game { background-color: #ffdd00; color: #007091; width: 180px; height: 50px; border-radius: 10px; font-size: 1.2em; text-transform: uppercase; font-weight: bold; margin: 1.2em; cursor: pointer; }
+#new-game {
+  background-color: #ffdd00;
+  color: #007091;
+  width: 180px;
+  height: 50px;
+  border-radius: 10px;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin: 1.2em;
+  cursor: pointer;
+}
 
-h1, h2, h3 { padding: 0.5em; }
+h1, h2, h3 {
+  padding: 0.5em;
+}
 
-h3 { text-transform: uppercase; }
+h3 {
+  text-transform: uppercase;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.overlay.show {
+  display: block;
+}
+
+.overlay .modal {
+  display: none;
+  background: #fff;
+  width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.overlay .modal.show {
+  display: block;
+}
+
+.overlay .modal .close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 0 10px;
+  color: #333;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.overlay .modal header {
+  font-size: 20px;
+  line-height: 30px;
+  min-height: 30px;
+  font-weight: bold;
+  padding: 10px 30px;
+  text-transform: uppercase;
+}
+
+.overlay .modal .content {
+  min-height: 30px;
+  padding: 15px 30px;
+}
+
+.overlay .modal .content #table {
+  border: none;
+  padding: 10px 0;
+}
+
+.overlay .modal .content #table thead {
+  background-color: #ffdd00;
+}
+
+.overlay .modal .content #table thead th {
+  padding: 5px;
+  text-transform: uppercase;
+  font-size: 0.8em;
+}
+
+.overlay .modal .content #table tbody {
+  background-color: #007091;
+}
+
+.overlay .modal .content #table tbody td {
+  padding: 5px;
+  color: #fff;
+  font-size: 0.8em;
+}
+/*# sourceMappingURL=style.css.map */
