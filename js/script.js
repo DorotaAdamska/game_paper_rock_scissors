@@ -10,19 +10,20 @@ var scoreDiv = document.querySelector('#score');
 var roundNumberInfo = document.querySelector('#round-number');
 var gameResultInfo = document.querySelector('#game-result');
 
+/* zmienne globalne */
+var params = {
+  player: {
+    score: 0,
+    choice: ''
+  },
+  computer: {
+    score: 0,
+    choice: ''
+  },
 
-var player = {
-  score: 0,
-  choice: ''
+  progress: [],
+  roundsNumber: ''
 }
-
-var computer = {
-  score: 0,
-  choice: ''
-}
-
-var progress = [];
-var roundsNumber;
 
 function computerMove() {
   var choices = ['kamień', 'papier', 'nożyczki'];
@@ -31,23 +32,23 @@ function computerMove() {
 }
 
 function checkRoundWinner() {
-  if((player.choice === 'nożyczki' && computer.choice === 'papier') || (player.choice === 'papier' && computer.choice === 'kamień') || (player.choice === 'kamień' && computer.choice === 'nożyczki')) {
-    player.score++;
-    output.innerHTML ='WYGRANA - Twój wybór to ' + player.choice + ', komputer wybrał ' + computer.choice;
+  if((params.player.choice === 'nożyczki' && params.computer.choice === 'papier') || (params.player.choice === 'papier' && params.computer.choice === 'kamień') || (params.player.choice === 'kamień' && params.computer.choice === 'nożyczki')) {
+    params.player.score++;
+    output.innerHTML ='WYGRANA - Twój wybór to ' + params.player.choice + ', komputer wybrał ' + params.computer.choice;
     return 'wygrana';
   }
-  else if(player.choice === computer.choice) {
-     output.innerHTML = 'REMIS - Ty i komputer wybraliście ' + player.choice;
+  else if(params.player.choice === params.computer.choice) {
+     output.innerHTML = 'REMIS - Ty i komputer wybraliście ' + params.player.choice;
      return 'remis';
   } else {
-    computer.score++;
-    output.innerHTML = 'PRZEGRANA - Twój wybór to ' + player.choice + ', komputer wybrał ' + computer.choice;
+    params.computer.score++;
+    output.innerHTML = 'PRZEGRANA - Twój wybór to ' + params.player.choice + ', komputer wybrał ' + params.computer.choice;
     return 'przegrana'
   }
 }
 
 function refreshScore() {
-  score.innerHTML = player.score + ' - ' + computer.score;
+  score.innerHTML = params.player.score + ' - ' + params.computer.score;
 }
 
 var btnChoice = document.querySelectorAll('.player-move');
@@ -61,25 +62,26 @@ for (var i = 0; i < btnChoice.length; i++) {
 }
 
 function addRoundResult() {
-    progress.push({
-      roundsNumber: roundsNumber,
-      playerChoice: player.choice,
-      computerChoice: computer.choice,
-      playerScore: player.score,
-      computerScore: computer.score,
+    params.progress.push({
+      roundsNumber: params.roundsNumber,
+      playerChoice: params.player.choice,
+      computerChoice: params.computer.choice,
+      playerScore: params.player.score,
+      computerScore: params.computer.score,
       roundWinner: checkRoundWinner()
     })
 }
 
+
 function playerMove(dataMove) {
 
-    player.choice = dataMove;
-    computer.choice = computerMove();
+    params.player.choice = dataMove;
+    params.computer.choice = computerMove();
 
     checkRoundWinner();
     refreshScore();
 
-    roundsNumber--;
+    params.roundsNumber--;
     addRoundResult();
     gameOver();  
 }
@@ -87,18 +89,18 @@ function playerMove(dataMove) {
 // new game
 
 gameBtn.addEventListener('click', function() {
-  roundsNumber = window.prompt('Ile rund ma mieć Twoja gra?');
-  if ((roundsNumber === null) || (roundsNumber < 3)) {
+  params.roundsNumber = window.prompt('Ile rund ma mieć Twoja gra?');
+  if ((params.roundsNumber === null) || (params.roundsNumber < 3)) {
       roundNumberInfo.innerHTML = 'Wpisz prawidłową wartość (minimum 3)'
   }
   else {
-      player.score = 0;
-      computer.score = 0;
-      player.choice = '';
-      computer.choice = '';
+      params.player.score = 0;
+      params.computer.score = 0;
+      params.player.choice = '';
+      params.computer.choice = '';
       refreshScore();
-      var winner = Math.floor(roundsNumber*1/2 +1);
-      roundNumberInfo.innerHTML = 'Ilość rund ' + roundsNumber + ' -   zwyciężysz jeśli wygrasz ' + winner + ' razy';
+      var winner = Math.floor(params.roundsNumber*1/2 +1);
+      roundNumberInfo.innerHTML = 'Ilość rund ' + params.roundsNumber + ' -   zwyciężysz jeśli wygrasz ' + winner + ' razy';
       paperBtn.disabled = false;
       rockBtn.disabled = false;
       scissorsBtn.disabled = false;
@@ -109,10 +111,10 @@ gameBtn.addEventListener('click', function() {
 // game over
 
 function gameOver() {
-  if(roundsNumber === 0) {
-    if(player.score > computer.score) {
+  if(params.roundsNumber === 0) {
+    if(params.player.score > params.computer.score) {
       showModal ('<br> Koniec gry. Gratulacje wygranej! <br>');
-    } else if(player.score < computer.score) {
+    } else if(params.player.score < params.computer.score) {
       showModal ('<br> Koniec gry. Wygrał komputer. <br>');
     } else showModal ('<br> Remis <br>');
     paperBtn.disabled = true;
@@ -125,23 +127,23 @@ function gameOver() {
 var table = document.getElementById('table');
 var tbody = table.querySelector('tbody');
 
-for (let i = 0; i < progress.length; i++) {
+for (let i = 0; i < params.progress.length; i++) {
   
   var row = document.createElement('tr');
   let roundsNumber = document.createElement('td')
-  roundsNumber.innerText = progress[i].roundsNumber + 1;
+  roundsNumber.innerText = params.progress[i].roundsNumber + 1;
 
   var playerChoice = document.createElement('td')
-  playerChoice.innerText = progress[i].playerChoice;
+  playerChoice.innerText = params.progress[i].playerChoice;
 
   var computerChoice = document.createElement('td')
-  computerChoice.innerText = progress[i].computerChoice;
+  computerChoice.innerText = params.progress[i].computerChoice;
 
   var roundResult = document.createElement('td')
-  roundResult.innerText = progress[i].playerScore + ':' + progress[i].computerScore;
+  roundResult.innerText = params.progress[i].playerScore + ':' + params.progress[i].computerScore;
 
   var roundWinner = document.createElement('td')
- roundWinner.innerText = progress[i].roundWinner;
+ roundWinner.innerText = params.progress[i].roundWinner;
 
    row.append(roundsNumber, playerChoice, computerChoice, roundResult, roundWinner)
    console.log(row);
