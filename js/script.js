@@ -94,6 +94,7 @@ gameBtn.addEventListener('click', function() {
       roundNumberInfo.innerHTML = 'Wpisz prawidłową wartość (minimum 3)'
   }
   else {
+      params.progress = [];
       params.player.score = 0;
       params.computer.score = 0;
       params.player.choice = '';
