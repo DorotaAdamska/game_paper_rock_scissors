@@ -4,6 +4,8 @@ var paperBtn = document.querySelector('#paper');
 var rockBtn = document.querySelector('#rock');
 var scissorsBtn = document.querySelector('#scissors');
 var gameBtn = document.querySelector('#new-game');
+var table = document.getElementById('table');
+var tbody = table.querySelector('tbody');
 
 var output = document.querySelector('#output');
 var scoreDiv = document.querySelector('#score');
@@ -32,6 +34,7 @@ function computerMove() {
 }
 
 function checkRoundWinner() {
+  console.log("Wlaczam checkRoundWinner")
   if((params.player.choice === 'nożyczki' && params.computer.choice === 'papier') || (params.player.choice === 'papier' && params.computer.choice === 'kamień') || (params.player.choice === 'kamień' && params.computer.choice === 'nożyczki')) {
     params.player.score++;
     output.innerHTML ='WYGRANA - Twój wybór to ' + params.player.choice + ', komputer wybrał ' + params.computer.choice;
@@ -58,12 +61,11 @@ for (var i = 0; i < btnChoice.length; i++) {
   btnChoice[i].addEventListener('click', function(){
     playerMove(dataMove);
   })
-  
+
 }
 
 function addRoundResult() {
     params.progress.push({
-      roundsNumber: params.roundsNumber,
       playerChoice: params.player.choice,
       computerChoice: params.computer.choice,
       playerScore: params.player.score,
@@ -77,13 +79,10 @@ function playerMove(dataMove) {
 
     params.player.choice = dataMove;
     params.computer.choice = computerMove();
-
-    checkRoundWinner();
-    refreshScore();
-
     params.roundsNumber--;
     addRoundResult();
-    gameOver();  
+    refreshScore();
+    gameOver();
 }
 // game over
 
@@ -98,18 +97,15 @@ function gameOver() {
     rockBtn.disabled = true;
     scissorsBtn.disabled = true;
     gameBtn.disabled = false;
-    
-    
+
+
 // Tabela
 
-var table = document.getElementById('table');
-var tbody = table.querySelector('tbody');
-
 for (let i = 0; i < params.progress.length; i++) {
-  
+
   var row = document.createElement('tr');
   var roundsNumber = document.createElement('td')
-  roundsNumber.innerText = params.progress[i].roundsNumber + 1;
+  roundsNumber.innerText = i + 1;
 
   var playerChoice = document.createElement('td')
   playerChoice.innerText = params.progress[i].playerChoice;
@@ -122,10 +118,10 @@ for (let i = 0; i < params.progress.length; i++) {
 
   var roundWinner = document.createElement('td')
   roundWinner.innerText = params.progress[i].roundWinner;
-  
+
   row.append(roundsNumber, playerChoice, computerChoice, roundResult, roundWinner)
   console.log(row)
-  tbody.append(row);  
+  tbody.append(row);
  }
   }
 };
@@ -143,9 +139,8 @@ gameBtn.addEventListener('click', function() {
       params.computer.score = 0;
       params.player.choice = '';
       params.computer.choice = '';
+      tbody.innerHTML = "";
       refreshScore();
-      var table = document.getElementById('table');
-      var tbody = table.querySelector('tbody');
       tbody.innerHTML = '';
       var winner = Math.floor(params.roundsNumber*1/2 +1);
       roundNumberInfo.innerHTML = 'Ilość rund ' + params.roundsNumber + ' -   zwyciężysz jeśli wygrasz ' + winner + ' razy';
@@ -157,7 +152,7 @@ gameBtn.addEventListener('click', function() {
 });
 
 
-// modale 
+// modale
 var showModal = function(text){
   document.querySelector('#modal-overlay').classList.add('show');
   document.querySelector('#modal-one').classList.add('show');
@@ -169,17 +164,17 @@ var hideModal = function(event){
   document.querySelector('#modal-overlay').classList.remove('show');
   document.querySelector('#modal-one').classList.remove('show');
 };
-  
+
  var closeButtons = document.querySelectorAll('.modal .close');
-  
+
 for(var i = 0; i < closeButtons.length; i++){
   closeButtons[i].addEventListener('click', hideModal);
 }
-  
+
 document.querySelector('#modal-overlay').addEventListener('click', hideModal);
-  
+
 var modals = document.querySelectorAll('.modal');
-  
+
 for(var i = 0; i < modals.length; i++){
   modals[i].addEventListener('click', function(event){
   event.stopPropagation();

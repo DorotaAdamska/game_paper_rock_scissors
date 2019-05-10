@@ -6,8 +6,13 @@
 
 body {
     font-family: 'Lato', sans-serif;
+    background: url('../images/game_psr.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
     text-align: center;
-    color: #4c4c4c;
+    color: #333333;
     padding: 3em;
 }
 
@@ -18,22 +23,28 @@ body {
 }
 
 .game-options .far {
-    background-color: #007091;
+    background-color: #949DA6;
     width: 100px;
     height: 100px;
-    border-radius: 10px;
-    color: #ffdd00;
+    border-radius: 50%;
+    color: #F2E5E4;
     position: relative;
-    font-size: 60px;
+    font-size: 50px;
     text-align: center;
     cursor: pointer;
+    border: none;
     line-height: 100px;
     margin: 20px;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+#output {
+  padding: 30px 0;
 }
 
 #new-game {
-    background-color: #ffdd00;
-    color: #007091;
+    background-color: #736C6C;
+    color: #F2E5E4;
     width: 180px;
     height: 50px;
     border-radius: 10px;
@@ -41,6 +52,7 @@ body {
     text-transform: uppercase;
     font-weight: bold;
     margin: 1.2em;
+    border: none;
     cursor: pointer;
 }
 
@@ -105,7 +117,8 @@ h3 {
       padding: 10px 0;
     
       thead {
-        background-color: #ffdd00;
+        background-color: #736C6C;
+        color: white;
 
         th {
           padding: 5px;
@@ -114,11 +127,11 @@ h3 {
         }
       }
     tbody {
-      background-color: #007091;
+      background-color: #949DA6;
     
       td {
         padding: 5px;
-        color: #fff;
+        color: #333333;
         font-size: 0.8em
       }
     }  
