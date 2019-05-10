@@ -43,7 +43,7 @@ function checkRoundWinner() {
   } else {
     params.computer.score++;
     output.innerHTML = 'PRZEGRANA - Twój wybór to ' + params.player.choice + ', komputer wybrał ' + params.computer.choice;
-    return 'przegrana'
+    return 'przegrana';
   }
 }
 
@@ -85,6 +85,50 @@ function playerMove(dataMove) {
     addRoundResult();
     gameOver();  
 }
+// game over
+
+function gameOver() {
+  if(params.roundsNumber === 0) {
+    if(params.player.score > params.computer.score) {
+      showModal ('<br> Koniec gry. Gratulacje wygranej! <br>');
+    } else if(params.player.score < params.computer.score) {
+      showModal ('<br> Koniec gry. Wygrał komputer. <br>');
+    } else showModal ('<br> Remis <br>');
+    paperBtn.disabled = true;
+    rockBtn.disabled = true;
+    scissorsBtn.disabled = true;
+    gameBtn.disabled = false;
+    
+    
+// Tabela
+
+var table = document.getElementById('table');
+var tbody = table.querySelector('tbody');
+
+for (let i = 0; i < params.progress.length; i++) {
+  
+  var row = document.createElement('tr');
+  var roundsNumber = document.createElement('td')
+  roundsNumber.innerText = params.progress[i].roundsNumber + 1;
+
+  var playerChoice = document.createElement('td')
+  playerChoice.innerText = params.progress[i].playerChoice;
+
+  var computerChoice = document.createElement('td')
+  computerChoice.innerText = params.progress[i].computerChoice;
+
+  var roundResult = document.createElement('td')
+  roundResult.innerText = params.progress[i].playerScore + ':' + params.progress[i].computerScore;
+
+  var roundWinner = document.createElement('td')
+  roundWinner.innerText = params.progress[i].roundWinner;
+  
+  row.append(roundsNumber, playerChoice, computerChoice, roundResult, roundWinner)
+  console.log(row)
+  tbody.append(row);  
+ }
+  }
+};
 
 // new game
 
@@ -100,6 +144,9 @@ gameBtn.addEventListener('click', function() {
       params.player.choice = '';
       params.computer.choice = '';
       refreshScore();
+      var table = document.getElementById('table');
+      var tbody = table.querySelector('tbody');
+      tbody.innerHTML = '';
       var winner = Math.floor(params.roundsNumber*1/2 +1);
       roundNumberInfo.innerHTML = 'Ilość rund ' + params.roundsNumber + ' -   zwyciężysz jeśli wygrasz ' + winner + ' razy';
       paperBtn.disabled = false;
@@ -109,52 +156,6 @@ gameBtn.addEventListener('click', function() {
   };
 });
 
-// game over
-
-function gameOver() {
-  if(params.roundsNumber === 0) {
-    if(params.player.score > params.computer.score) {
-      showModal ('<br> Koniec gry. Gratulacje wygranej! <br>');
-    } else if(params.player.score < params.computer.score) {
-      showModal ('<br> Koniec gry. Wygrał komputer. <br>');
-    } else showModal ('<br> Remis <br>');
-    paperBtn.disabled = true;
-    rockBtn.disabled = true;
-    scissorsBtn.disabled = true;
-    gameBtn.disabled = false;
-    
-    // Tabela
-
-var table = document.getElementById('table');
-var tbody = table.querySelector('tbody');
-
-for (let i = 0; i < params.progress.length; i++) {
-  
-  var row = document.createElement('tr');
-  let roundsNumber = document.createElement('td')
-  roundsNumber.innerText = params.progress[i].roundsNumber + 1;
-
-  var playerChoice = document.createElement('td')
-  playerChoice.innerText = params.progress[i].playerChoice;
-
-  var computerChoice = document.createElement('td')
-  computerChoice.innerText = params.progress[i].computerChoice;
-
-  var roundResult = document.createElement('td')
-  roundResult.innerText = params.progress[i].playerScore + ':' + params.progress[i].computerScore;
-
-  var roundWinner = document.createElement('td')
- roundWinner.innerText = params.progress[i].roundWinner;
-
-   row.append(roundsNumber, playerChoice, computerChoice, roundResult, roundWinner)
-   console.log(row);
-    tbody.append(row);
- }
-
-
-
-  }
-};
 
 // modale 
 var showModal = function(text){

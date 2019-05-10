@@ -17,15 +17,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/starakociara/game_paper_rock_scissors.git"
+    "url": "git+https://github.com/DorotaAdamska/game_paper_rock_scissors.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/starakociara/game_paper_rock_scissors/issues"
+    "url": "https://github.com/DorotaAdamska/game_paper_rock_scissors/issues"
   },
-  "homepage": "https://github.com/starakociara/game_paper_rock_scissors#readme",
+  "homepage": "https://github.com/DorotaAdamska/game_paper_rock_scissors#readme",
   "devDependencies": {
     "autoprefixer-cli": "^1.0.0",
     "browser-sync": "^2.26.3",
